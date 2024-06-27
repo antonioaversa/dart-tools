@@ -554,13 +554,13 @@ Future<void> writeCountsToFile(List<int> counts, String filePath) async {
 void main(List<String> arguments) async {
   final httpClient = HttpClient();
   final counts = List.filled(ruleSets.length, 0);
-  final file = File("data/urls.txt");
+  final file = File("data_in/urls.txt");
   final lines = file.openRead().transform(utf8.decoder).transform(LineSplitter());
   var urlIndex = 0;
   await for (var line in lines) {
     try {
       await updateCountsFromUrl(counts, line, httpClient);
-      await writeCountsToFile(counts, "out_$urlIndex.txt");
+      await writeCountsToFile(counts, "data_out/out_$urlIndex.txt");
       await Future.delayed(Duration(seconds: 5));
     } catch (e) {
       print("Error: $e");
